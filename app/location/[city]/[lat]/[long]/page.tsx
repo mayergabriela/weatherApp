@@ -3,6 +3,9 @@ import fetchWeatherQuery from "@/graphql/queries/fetchWeatherQueries";
 import CalloutCard from "@/components/CalloutCard";
 import StatCard from "@/components/StatCard";
 import InformationPanel from "@/components/InformationPanel";
+import RainChart from "@/components/RainChart";
+import TempChart from "@/components/TempChart";
+import HumidityChart from "@/components/HumidityChart";
 
 type Props = {
   params: {
@@ -31,7 +34,8 @@ async function WeatherPage({ params: { city, lat, long } }: Props) {
     <div className="flex flex-col min-h-screen md:flex-row">
       {/*Information Pannel */}
       <InformationPanel city={city} long={long} lat={lat} results={results} />
-      <div>
+
+      <div className="flex-1 p-5 lg:p-10">
         <div className="pb-5">
           <div className="pb-5">
             <h2 className="text-xl font-bold">Todays Overview</h2>
@@ -94,9 +98,14 @@ async function WeatherPage({ params: { city, lat, long } }: Props) {
       </div>
       <hr className="mb-5" />
       <div className="space-y-3">
-        {/*TEmperature Charts */}
-        {/*Rain Charts */}
-        {/*Humidity Charts */}
+        {/*TEmperature Chart */}
+        <TempChart results={results} />
+
+        {/*Rain Chart */}
+        <RainChart results={results} />
+
+        {/*Humidity Chart */}
+        <HumidityChart results={results} />
       </div>
     </div>
   );
