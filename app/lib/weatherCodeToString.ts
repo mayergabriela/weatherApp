@@ -121,3 +121,5 @@ const weatherCodeToString: {
     label: "Thunderstorm",
   },
 };
+
+export default weatherCodeToString;
