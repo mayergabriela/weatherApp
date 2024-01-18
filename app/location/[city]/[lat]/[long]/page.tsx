@@ -7,6 +7,8 @@ import RainChart from "@/components/RainChart";
 import TempChart from "@/components/TempChart";
 import HumidityChart from "@/components/HumidityChart";
 
+export const revalidate = 60; // 1 minute
+
 type Props = {
   params: {
     city: string;
