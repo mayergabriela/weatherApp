@@ -6,6 +6,7 @@ import InformationPanel from "@/components/InformationPanel";
 import RainChart from "@/components/RainChart";
 import TempChart from "@/components/TempChart";
 import HumidityChart from "@/components/HumidityChart";
+import getBasePath from "@/app/lib/getBasePath";
 
 export const revalidate = 60; // 1 minute
 
@@ -32,6 +33,21 @@ async function WeatherPage({ params: { city, lat, long } }: Props) {
 
   const results: Root = data.myQuery;
 
+  const dataToSend = cleanData(results, city);
+
+  const res = await fetch(`${getBasePath()}/api/getWeatherSummary`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      weatherData: dataToSend,
+    }),
+  });
+
+  const GPTdata = await res.json();
+  const { content } = GPTdata;
+
   return (
     <div className="flex flex-col min-h-screen md:flex-row">
       {/*Information Pannel */}
@@ -50,7 +66,11 @@ async function WeatherPage({ params: { city, lat, long } }: Props) {
 
           {/*Callout Card - It's the GPT Summary */}
           <div className="m-2 mb-10">
-            <CalloutCard message="This is where GPT Summary will go" />
+            <CalloutCard message={content} />
+          </div>
+
+          <div className="m-2 mb-10">
+            <CalloutCard message="This is where GPT Summary will go" />C
           </div>
 
           {/*Temperature Stats */}

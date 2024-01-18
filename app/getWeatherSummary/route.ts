@@ -5,7 +5,7 @@ export async function POST(request: Request) {
   // Weatherdata in the body of the POST request
   const { weatherdata } = await request.json();
 
-  const response = await openai.createChatCompletion({
+  const response = await OpenAI.createChatCompletion({
     model: "gpt-3.5-turbo",
     temperature: 0.8,
     n: 1,
@@ -19,7 +19,7 @@ export async function POST(request: Request) {
       {
         role: "user",
         content: `Hi there! Can I get a summary of todays weather, use the following information to get the weather,data: ${JSON.stringify(
-          weatherData
+          weatherdata
         )}`,
       },
     ],
