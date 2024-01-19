@@ -78,13 +78,17 @@ async function WeatherPage({ params: { city, lat, long } }: Props) {
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-5 m-2 ">
             <StatCard
               title="Maximum Temperature"
-              metric={`${results.daily.temperature_2m_max[0].toFixed(1)}°C`}
+              metric={`${parseFloat(
+                results.daily.temperature_2m_max[0]
+              ).toFixed(1)}°C`}
               color="yellow"
             />
 
             <StatCard
               title="Minimum Temperature"
-              metric={`${results.daily.temperature_2m_min[0].toFixed(1)}°C`}
+              metric={`${parseFloat(
+                results.daily.temperature_2m_min[0]
+              ).toFixed(1)}°C`}
               color="green"
             />
           </div>
@@ -93,10 +97,10 @@ async function WeatherPage({ params: { city, lat, long } }: Props) {
           <div>
             <StatCard
               title="UV Index"
-              metric={`${results.daily.uv_index_max[0].toFixed(1)}`}
+              metric={`${parseFloat(results.daily.uv_index_max[0]).toFixed(1)}`}
               color="rose"
             />
-            {Number(results.daily.uv_index_max[0].toFixed(1)) > 5 && (
+            {parseFloat(results.daily.uv_index_max[0]) > 5 && (
               <CalloutCard
                 message={"The UV is high today, so be sure to wear SPF!"}
                 warning
