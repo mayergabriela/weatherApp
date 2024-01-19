@@ -7,6 +7,7 @@ import RainChart from "@/components/RainChart";
 import TempChart from "@/components/TempChart";
 import HumidityChart from "@/components/HumidityChart";
 import getBasePath from "@/app/lib/getBasePath";
+import cleanData from "@/app/lib/cleanData";
 
 export const revalidate = 60; // 1 minute
 
